@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FiFi's Finds – Map</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <header>
+    <h1>FiFi's Finds</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="places.html">Finds</a>
+      <a href="map.html">Map</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Explore FiFi's Finds on the Map</h2>
+    <div id="map"></div>
+  </main>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([51.5905, -0.1082], 12); // Centered on Wood Green
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const places = [
+      {
+        name: "Three Olive",
+        coords: [51.5905, -0.1082],
+        summary: "A cozy café in Wood Green with a green vibe.",
+        link: "three-olive.html"
+      }
+      // Add more places here
+    ];
+
+    places.forEach(place => {
+      const marker = L.marker(place.coords).addTo(map);
+      marker.bindPopup(`<strong>${place.name}</strong><br>${place.summary}<br><a href="${place.link}">View Details</a>`);
+    });
+  </script>
+</body>
+</html>
